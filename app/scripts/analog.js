@@ -8,81 +8,101 @@ export default class Analog extends Clock {
     super();
 
     this.d3Service = new d3Service();
+    this.range = 100;
+    this.center = 150;
+    this.shortWidth = 8;
+    this.shortHeight = 50;
+    this.longWidth = 5;
+    this.longHeight = 80;
+    this.secondWidth = 2;
+    this.secondHeight = 80;
 
     const borderData = [{
-      cx: 150,
-      cy: 150,
-      r: 100,
+      cx: this.center,
+      cy: this.center,
+      r: this.range,
       class: "clock-border"
     }];
 
     const clockData = [{
-      x: 146,
-      y: 146,
-      width: 8,
-      height: 50,
+      x: this.center - this.shortWidth / 2,
+      y: this.center - this.shortWidth / 2,
+      width: this.shortWidth,
+      height: this.shortHeight,
       class: "short-hand"
     }, {
-      x: 147.5,
-      y: 147.5,
-      width: 5,
-      height: 80,
+      x: this.center - this.longWidth / 2,
+      y: this.center - this.longWidth / 2,
+      width: this.longWidth,
+      height: this.longHeight,
       class: "long-hand"
     }, {
-      x: 149,
-      y: 149,
-      width: 2,
-      height: 80,
+      x: this.center - this.secondWidth / 2,
+      y: this.center - this.secondWidth / 2,
+      width: this.secondWidth,
+      height: this.secondHeight,
       class: "second-hand"
     }];
 
-    let svgContainer = d3.select("div.clock-analog").append("svg")
+    this.svgContainer = d3.select("div.clock-analog-svg").append("svg")
       .attr("width", 300)
       .attr("height", 300);
 
-    let border = svgContainer.selectAll("circle")
+    let border = this.svgContainer.selectAll("circle")
       .data(borderData)
       .enter()
       .append("circle");
 
     this.d3Service.updateProperties(borderData, border);
 
-    let clocks = svgContainer.selectAll("rect")
+    let clocks = this.svgContainer.selectAll("rect")
       .data(clockData)
       .enter()
       .append("rect");
 
     this.d3Service.updateProperties(clockData, clocks);
 
-    const numberData = [1, 2, 3, 4, 5];
-
     this.lastTime = {};
     this.short = clocks.filter(".short-hand");
     this.long = clocks.filter(".long-hand");
     this.second = clocks.filter(".second-hand");
 
-    this.hide(this.long);
+
+    this.secondShifter = this.spawnShifter(60, 5);
+    this.hourShifter = this.spawnShifter(12, 10);
+
   }
 
-  hide(element) {
-    element.attr("visibility", "hidden");
-  }
+  spawnShifter(n, long = 10) {
+    let lineData = [];
+    for (let i = 0; i < n; i++) {
+      lineData.push({
+        x1: this.center + this.range - long,
+        y1: this.center,
+        x2: this.center + this.range,
+        y2: this.center,
+        "style": "stroke: #000",
+        'transform': 'rotate(' + (i * 360 / n - 90) + ' 150 150)'
+      });
+    }
+    let lines = this.svgContainer.selectAll()
+      .data(lineData)
+      .enter()
+      .append("line");
 
-  show(element) {
-    element.attr("visibility", "visible");
+    this.d3Service.updateProperties(lineData, lines);
+    return lines;
   }
 
   rotate(el, angle, max, duration) {
     el.transition().duration(duration)
-      .attrTween("transform", _rotTween);
-
-    function _rotTween() {
-      angle = (angle / max * 360) + 180;
-      const i = d3.interpolate(angle, angle + 360 / max);
-      return (t) => {
-        return "rotate(" + i(t) + ",150,150)";
-      };
-    }
+      .attrTween("transform", () => {
+        angle = (angle / max * 360) + 180;
+        const i = d3.interpolate(angle, angle + 360 / max);
+        return (t) => {
+          return "rotate(" + i(t) + ",150,150)";
+        };
+      });
   }
 
   tick() {
@@ -92,6 +112,15 @@ export default class Analog extends Clock {
       this.rotate(this.second, time.second, 60, 20000);
       this.rotate(this.long, (time.minute * 60 + time.second), 3600, 5);
       this.rotate(this.short, (time.hour * 60 + time.minute), 720, 5);
+    }
+  }
+
+  set(name, action, value) {
+    // console.log(name, action, value);
+    switch (action) {
+      case "toggle":
+        value ? this.d3Service.show(this[name]) : this.d3Service.hide(this[name]);
+        break;
     }
   }
 
