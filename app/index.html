@@ -6,7 +6,6 @@
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>slideworx</title>
-
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.css" />
   <link rel="stylesheet" href="styles/main.css">
@@ -14,48 +13,89 @@
 
 <body>
   <div class="container">
+
     <div class="header">
       <ul class="nav nav-pills pull-right">
         <li class="active">
-          <a href="#">Analog</a>
+          <a id="analog-switch" href="#">Analog</a>
         </li>
         <li>
-          <a href="#">Digital</a>
+          <a id="digital-switch" href="#">Digital</a>
         </li>
       </ul>
       <h3 class="text-muted">CLOCK</h3>
     </div>
-    <div class="clock-panel">
-      <div class="col-md-9">
-        <div class="clock-analog"></div>
-        <div class="clock-digital"></div>
-      </div>
-      <div class="col-md-3">
-        <div class="btn-group">
-          <button id="settings" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          SETTINGS <span class="caret"></span>
-        </button>
-          <ul class="dropdown-menu">
-            <li>
-              <div class="checkbox">
-                <label>
-                <input type="checkbox"> Check me out
-              </label>
+
+    <div class="content">
+      <div id="clock-analog-panel">
+        <div class="col-md-7">
+          <div class="clock-analog-svg"></div>
+        </div>
+        <div class="col-md-5">
+          <div class="panel-group">
+            <div class="panel panel-default">
+              <div class="panel-heading" data-toggle="collapse" href="#settings-panel-analog">
+                <h4 class="panel-title center">
+                  SETTINGS
+                </h4>
               </div>
-            </li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#">Separated link</a></li>
-          </ul>
+              <div id="settings-panel-analog" class="panel-collapse collapse">
+                <div class="panel-body">
+                  <h5>TOGGLE</h5>
+                  <div class="checkbox">
+                    <div><label>
+                      <input type="checkbox" name="short" action="toggle" checked> hour indicator
+                    </label></div>
+                    <div><label>
+                      <input type="checkbox" name="long" action="toggle" checked> minute indicator
+                    </label></div>
+                    <div><label>
+                      <input type="checkbox" name="second" action="toggle" checked> second indicator
+                    </label></div>
+                    <div><label>
+                      <input type="checkbox" name="hourShifter" action="toggle" checked> hours shifter
+                    </label></div>
+                    <div><label>
+                      <input type="checkbox" name="secondShifter" action="toggle" checked> seconds shifter
+                    </label></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="clock-digital-panel" class="hide">
+        <div class="col-md-7">
+          <div class="clock-digital-svg"></div>
+        </div>
+        <div class="col-md-5">
+          <div class="panel-group">
+            <div class="panel panel-default">
+              <div class="panel-heading" data-toggle="collapse" href="#settings-panel-digital">
+                <h4 class="panel-title center">
+                  SETTINGS
+                </h4>
+              </div>
+              <div id="settings-panel-digital" class="panel-collapse collapse">
+                <div class="panel-body">
+                  <h5>TOGGLE</h5>
+                  <div class="checkbox">
+                    <div><label>
+                      <input type="checkbox" name="short" action="toggle" checked> test
+                    </label></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 
-
   <script src="/bower_components/jquery/dist/jquery.js"></script>
-
   <script src="/bower_components/bootstrap/js/affix.js"></script>
   <script src="/bower_components/bootstrap/js/alert.js"></script>
   <script src="/bower_components/bootstrap/js/dropdown.js"></script>
@@ -68,7 +108,6 @@
   <script src="/bower_components/bootstrap/js/scrollspy.js"></script>
   <script src="/bower_components/bootstrap/js/collapse.js"></script>
   <script src="/bower_components/bootstrap/js/tab.js"></script>
-
   <script src="scripts/bundle.js"></script>
 </body>
 
