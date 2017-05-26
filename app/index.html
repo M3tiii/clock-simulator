@@ -27,6 +27,10 @@
     </div>
 
     <div class="content">
+      <div class="day-time">
+        <p class="day-name"></p>
+        <p class="day-date"></p>
+      </div>
       <div id="clock-analog-panel">
         <div class="col-md-7">
           <div class="clock-analog-svg"></div>
@@ -44,19 +48,19 @@
                   <h5>TOGGLE</h5>
                   <div class="checkbox">
                     <div><label>
-                      <input type="checkbox" name="short" action="toggle" checked> hour indicator
+                      <input type="checkbox" name="short" action="toggle-visibility" checked> hour indicator
                     </label></div>
                     <div><label>
-                      <input type="checkbox" name="long" action="toggle" checked> minute indicator
+                      <input type="checkbox" name="long" action="toggle-visibility" checked> minute indicator
                     </label></div>
                     <div><label>
-                      <input type="checkbox" name="second" action="toggle" checked> second indicator
+                      <input type="checkbox" name="second" action="toggle-visibility" checked> second indicator
                     </label></div>
                     <div><label>
-                      <input type="checkbox" name="hourShifter" action="toggle" checked> hours shifter
+                      <input type="checkbox" name="hourShifter" action="toggle-visibility" checked> hours shifter
                     </label></div>
                     <div><label>
-                      <input type="checkbox" name="secondShifter" action="toggle" checked> seconds shifter
+                      <input type="checkbox" name="secondShifter" action="toggle-visibility" checked> seconds shifter
                     </label></div>
                   </div>
                 </div>
@@ -83,7 +87,16 @@
                   <h5>TOGGLE</h5>
                   <div class="checkbox">
                     <div><label>
-                      <input type="checkbox" name="short" action="toggle" checked> test
+                      <input type="checkbox" name="digitalHour" action="toggle-visibility" checked> hour counter
+                    </label></div>
+                    <div><label>
+                      <input type="checkbox" name="digitalMinute" action="toggle-visibility" checked> minute counter
+                    </label></div>
+                    <div><label>
+                      <input type="checkbox" name="digitalSecond" action="toggle-visibility" checked> second counter
+                    </label></div>
+                    <div><label>
+                      <input type="checkbox" name="timeMode" action="toogle-boolean" checked> 24H/12H
                     </label></div>
                   </div>
                 </div>
