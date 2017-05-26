@@ -1,0 +1,49 @@
+body {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.content {
+  padding-top: 20px;
+}
+
+.clock-border {
+  fill: none;
+  stroke: black;
+  stroke-width: 3pt;
+}
+
+.header {
+  padding-bottom: 20px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.panel-heading:hover {
+  cursor: pointer;
+}
+
+.hide {
+  display: none;
+}
+
+.center {
+  text-align: center;
+}
+
+@font-face {
+  font-family: 'square';
+  src: url('../fonts/square_sans_serif_7.ttf');
+}
+
+.digital-number {
+  /*font-family: 'square';*/
+  /*font-weight: bold;
+  stroke: #fff;
+  stroke-width: 1px;*/
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 730px;
+  }
+}
