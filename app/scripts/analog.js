@@ -115,15 +115,6 @@ export default class Analog extends Clock {
     }
   }
 
-  set(name, action, value) {
-    // console.log(name, action, value);
-    switch (action) {
-      case "toggle":
-        value ? this.d3Service.show(this[name]) : this.d3Service.hide(this[name]);
-        break;
-    }
-  }
-
   render() {
     this.run(() => {
       this.tick()
