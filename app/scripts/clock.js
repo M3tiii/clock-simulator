@@ -37,8 +37,18 @@ export default class Clock {
     }
   }
 
+  synchronzieClock() {
+    return new Promise((resolve) => {
+      const actual = this.getTime();
+      setTimeout(() => {
+        resolve(true);
+      }, (1000 - actual.msecond));
+    })
+  }
+
   fillDate() {
     const actual = this.getDate();
+    console.log(this.getTime().msecond);
     if (JSON.stringify(actual) !== JSON.stringify(this.actualDay)) {
       this.actualDay = actual;
       let dayNamePanel = $(".day-name");
@@ -51,9 +61,11 @@ export default class Clock {
   }
 
   run(callback) {
-    setInterval(() => {
-      this.fillDate();
-      callback();
-    }, 1000);
+    this.synchronzieClock().then(() => {
+      setInterval(() => {
+        this.fillDate();
+        callback();
+      }, 1000);
+    })
   }
 }
