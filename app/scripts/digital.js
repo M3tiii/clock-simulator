@@ -104,7 +104,7 @@ export default class Digital extends Clock {
   tick() {
     const time = this.getTime();
     if (time.second != this.lastTime.second) {
-      time.hour = this.timeMode ? time.hour : (time.hour > 12 ? (time.hour - 12) : time.hour)
+      time.hour = this.timeMode ? time.hour : (time.hour >= 12 ? (time.hour - 12) : time.hour)
       this.digitalHour.text(this.toTimerPrefix(time.hour));
       this.digitalMinute.text(this.toTimerPrefix(time.minute));
       this.digitalSecond.text(this.toTimerPrefix(time.second));
