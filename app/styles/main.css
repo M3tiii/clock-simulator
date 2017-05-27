@@ -26,6 +26,10 @@ body {
   text-align: center;
 }
 
+.time-offset-panel {
+  padding-bottom: 20px;
+}
+
 @font-face {
   font-family: "square";
   src: url("../fonts/square_sans_serif_7.ttf");

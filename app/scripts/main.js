@@ -10,10 +10,23 @@ $(document).ready(function() {
   const analogPanel = $("#clock-analog-panel");
   const digitalPanel = $("#clock-digital-panel");
 
+  const timeOffsetLabels = $(".time-offset-panel");
+
   // handle checkbox events
   $(":checkbox, :radio").change(function() {
     scene.setSettings(this.getAttribute("data-name"), this.getAttribute("data-action"), this.checked);
   });
+
+  // handle chnage time zone
+  timeOffsetLabels.click(function(event) {
+    const labels = $(this).children();
+    const target = $(event.target);
+    if (target.hasClass("btn")) {
+      labels.removeClass("btn-primary");
+      target.toggleClass("btn-primary");
+      scene.setSettings("", "change-timezone", event.target.getAttribute("data-time"));
+    }
+  })
 
   // handle button analog switch
   analogSwitch.click(() => {

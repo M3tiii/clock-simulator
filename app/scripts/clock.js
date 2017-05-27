@@ -4,6 +4,7 @@ export default class Clock {
 
   constructor() {
     this.intervalId;
+    this.timezoneOffset = 1;
     this.lastTime = {};
     this.lastDate = {};
     this.days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
@@ -22,26 +23,29 @@ export default class Clock {
       case "radio-switch":
         this.switchSymbols(name);
         break;
+      case "change-timezone":
+        this.timezoneOffset = Number(value);
+        break;
     }
   }
 
   getTime() {
-    const currentdate = new Date();
+    const currentTime = new Date();
     return {
-      hour: currentdate.getHours(),
-      minute: currentdate.getMinutes(),
-      second: currentdate.getSeconds(),
-      msecond: currentdate.getMilliseconds()
+      hour: currentTime.getUTCHours() + this.timezoneOffset,
+      minute: currentTime.getUTCMinutes(),
+      second: currentTime.getUTCSeconds(),
+      msecond: currentTime.getUTCMilliseconds()
     };
   }
 
   getDate() {
-    const currentdate = new Date();
+    const currentDate = new Date();
     return {
-      year: currentdate.getFullYear(),
-      month: currentdate.getMonth(),
-      day: currentdate.getDate(),
-      weekDay: currentdate.getDay()
+      year: currentDate.getFullYear(),
+      month: currentDate.getMonth(),
+      day: currentDate.getDate(),
+      weekDay: currentDate.getDay()
     };
   }
 
