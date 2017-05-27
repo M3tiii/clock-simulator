@@ -10,6 +10,7 @@
     "babelify": "^7.3.0",
     "browser-sync": "^2.2.1",
     "browserify": "^14.3.0",
+    "d3": "^4.9.1",
     "del": "^2.2.0",
     "gulp": "^3.9.0",
     "gulp-autoprefixer": "^3.0.1",
