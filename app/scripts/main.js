@@ -1,32 +1,35 @@
-import Scene from './scene';
+import Scene from "./scene";
 
 $(document).ready(function() {
 
-  let scene = new Scene();
+  const scene = new Scene();
 
-  let analogSwitch = $("#analog-switch");
-  let digitalSwitch = $("#digital-switch");
+  const analogSwitch = $("#analog-switch");
+  const digitalSwitch = $("#digital-switch");
 
-  let analogPanel = $("#clock-analog-panel");
-  let digitalPanel = $("#clock-digital-panel");
+  const analogPanel = $("#clock-analog-panel");
+  const digitalPanel = $("#clock-digital-panel");
 
-  $(':checkbox').change(function() {
-    scene.setSettings(this.getAttribute('name'), this.getAttribute('action'), this.checked);
+  // handle checkbox events
+  $(":checkbox, :radio").change(function() {
+    scene.setSettings(this.getAttribute("data-name"), this.getAttribute("data-action"), this.checked);
   });
 
+  // handle button analog switch
   analogSwitch.click(() => {
     analogSwitch.parent().addClass("active");
     digitalSwitch.parent().removeClass("active");
-    analogPanel.removeClass("hide");
-    digitalPanel.addClass("hide");
+    analogPanel.removeClass("hidden");
+    digitalPanel.addClass("hidden");
     scene.toggleClock("analog");
-  })
+  });
 
+  // handle button digital switch
   digitalSwitch.click(() => {
     digitalSwitch.parent().addClass("active");
     analogSwitch.parent().removeClass("active");
-    digitalPanel.removeClass("hide");
-    analogPanel.addClass("hide");
+    digitalPanel.removeClass("hidden");
+    analogPanel.addClass("hidden");
     scene.toggleClock("digital");
-  })
+  });
 });
