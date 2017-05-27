@@ -22,24 +22,17 @@ body {
   cursor: pointer;
 }
 
-.hide {
-  display: none;
-}
-
 .center {
   text-align: center;
 }
 
 @font-face {
-  font-family: 'square';
-  src: url('../fonts/square_sans_serif_7.ttf');
+  font-family: "square";
+  src: url("../fonts/square_sans_serif_7.ttf");
 }
 
 .digital-number {
-  /*font-family: 'square';*/
-  /*font-weight: bold;
-  stroke: #fff;
-  stroke-width: 1px;*/
+  font-family: "square";
 }
 
 @media (min-width: 768px) {
