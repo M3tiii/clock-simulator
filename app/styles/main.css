@@ -26,8 +26,8 @@ body {
   text-align: center;
 }
 
-.time-offset-panel {
-  padding-bottom: 20px;
+.time-offset-panel, .time-offset {
+  margin-bottom: 10px;
 }
 
 @font-face {
