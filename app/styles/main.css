@@ -26,7 +26,7 @@ body {
   text-align: center;
 }
 
-.time-offset-panel, .time-offset {
+.time-offset-panel, .time-offset-analog, .time-offset-digital {
   margin-bottom: 10px;
 }
 

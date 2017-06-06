@@ -1,10 +1,10 @@
-import Analog from "./analog";
-import Digital from "./digital";
+import Analog from './analog';
+import Digital from './digital';
 
 export default class Scene {
   constructor() {
 
-    this.actual = "analog"; // actual selected clock
+    this.actual = 'analog'; // actual selected clock
 
     this.clocks = {
       analog: new Analog(),

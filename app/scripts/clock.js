@@ -1,30 +1,31 @@
-import d3Service from "./d3Service";
+import d3Service from './d3Service';
 
 export default class Clock {
 
   constructor() {
     this.intervalId;
-    this.timezoneOffset = 1;
+    this.timezoneOffset = 2;
     this.lastTime = {};
     this.lastDate = {};
-    this.days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
-    this.months = ["january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december"];
+    this.days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+    this.months = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december'];
   }
 
   // handle settings checkboxes
   set(name, action, value) {
     switch (action) {
-      case "toggle-visibility":
+      case 'toggle-visibility':
         value ? d3Service.show(this[name]) : d3Service.hide(this[name]);
         break;
-      case "toggle-boolean":
+      case 'toggle-boolean':
         this[name] = value;
         break;
-      case "radio-switch":
+      case 'radio-switch':
         this.switchSymbols(name);
         break;
-      case "change-timezone":
+      case 'change-timezone':
         this.timezoneOffset = Number(value);
+        this.callback(true);
         break;
     }
   }
@@ -85,15 +86,17 @@ export default class Clock {
 
   // start running clock
   render() {
-    this.run(this.tick.bind(this));
+    this.callback = this.tick.bind(this);
+    this.callback(true); //set first status of time to avoid view of unset clock before synchronize which may take to 1 sec
+    this.run();
   }
 
   // start main clock interval every 1 sec
-  run(callback) {
-    callback(); //set first status of time to avoid view of unset clock before synchronize which may take to 1 sec
+  run() {
     this.synchronzieClock().then(() => {
+      this.callback(true);
       this.intervalId = setInterval(() => {
-        callback();
+        this.callback();
       }, 1000);
     });
   }
